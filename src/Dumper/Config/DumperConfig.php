@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Smile\GdprDump\Dumper\Config;
 
-use Ifsnop\Mysqldump\Mysqldump;
+use Druidfi\Mysqldump\Compress\CompressManagerFactory;
+use Druidfi\Mysqldump\DumpSettings;
 use Smile\GdprDump\Config\ConfigInterface;
 use Smile\GdprDump\Dumper\Config\Table\TableConfig;
 use Smile\GdprDump\Dumper\Config\Validation\QueryValidator;
@@ -49,7 +50,7 @@ class DumperConfig
 
     private array $dumpSettings = [
         'output' => 'php://stdout',
-        'compress' => Mysqldump::NONE,
+        'compress' => CompressManagerFactory::NONE,
         'init_commands' => [],
         'reset_auto_increment' => false,
         'add_drop_database' => false,
@@ -57,13 +58,13 @@ class DumperConfig
         'add_drop_trigger' => true,
         'add_locks' => true,
         'complete_insert' => false,
-        'default_character_set' => Mysqldump::UTF8,
+        'default_character_set' => DumpSettings::UTF8,
         'disable_keys' => true,
         'extended_insert' => true,
         'events' => false,
         'hex_blob' => false, // true in MySQLDump-PHP
         'insert_ignore' => false,
-        'net_buffer_length' => Mysqldump::MAXLINESIZE,
+        'net_buffer_length' => 1000000,
         'no_autocommit' => true,
         'no_create_info' => false,
         'lock_tables' => false, // true in MySQLDump-PHP
